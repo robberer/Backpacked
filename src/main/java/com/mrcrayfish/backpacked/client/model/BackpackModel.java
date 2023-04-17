@@ -13,6 +13,8 @@ import java.util.function.Function;
 
 public abstract class BackpackModel extends Model
 {
+    private static final Vector3d DEFAULT_OFFSET = new Vector3d(0, 9, -6);
+
     public BackpackModel()
     {
         super(RenderType::entityCutoutNoCull);
@@ -30,7 +32,18 @@ public abstract class BackpackModel extends Model
         renderer.zRot = z;
     }
 
+    public void setupAngles(PlayerEntity player, ModelRenderer body, boolean armour, float partialTick)
+    {
+        this.setupAngles(body, armour);
+    }
+
+    @Deprecated
     public void setupAngles(ModelRenderer body, boolean armour)
+    {
+        this.beforeRender(body, armour);
+    }
+
+    private void beforeRender(ModelRenderer body, boolean armour)
     {
         ModelRenderer root = this.getRoot();
         root.copyFrom(body);
@@ -58,4 +71,9 @@ public abstract class BackpackModel extends Model
     public abstract ModelRenderer getStraps();
 
     public abstract ResourceLocation getTextureLocation();
+
+    public Vector3d getShelfOffset()
+    {
+        return DEFAULT_OFFSET;
+    }
 }

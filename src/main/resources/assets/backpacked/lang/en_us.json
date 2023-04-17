@@ -35,6 +35,12 @@
     "backpacked.backpack.cardboard_box.unlock": "Chop 1000 Logs to unlock this backpack",
     "backpacked.backpack.sheep_plush": "Sheep Plush",
     "backpacked.backpack.sheep_plush.unlock": "Shear 250 Sheep to unlock this backpack",
+    "backpacked.backpack.wandering_bag": "Wandering Pack",
+    "backpacked.backpack.wandering_bag.unlock": "Trade with 5 different Wandering Traders to unlock this backpack",
+    "backpacked.backpack.piglin_pack": "Piglin Pack",
+    "backpacked.backpack.piglin_pack.unlock": "Explore all biomes in The Nether to unlock this backpack",
+    "backpacked.backpack.end_crystal": "End Crystal",
+    "backpacked.backpack.end_crystal.unlock": "Kill the Ender Dragon to unlock this backpack",
     "backpacked.chat.install_configured": "Install %s to access config options",
     "backpacked.chat.open_curseforge_page": "Open CurseForge Page",
     "backpacked.formatter.collected_x_of_x": "Collected %s / %s",
@@ -44,5 +50,9 @@
     "backpacked.formatter.used_x_times": "Used %s Times",
     "backpacked.formatter.bred_x_of_x": "Bred %s / %s",
     "backpacked.formatter.cut_x_of_x": "Cut %s / %s",
-    "backpacked.formatter.shear_x_sheep": "Sheared %s / %s"
+    "backpacked.formatter.shear_x_sheep": "Sheared %s / %s",
+    "backpacked.formatter.incomplete": "Incomplete",
+    "backpacked.formatter.complete": "Complete",
+    "backpacked.formatter.traded_x_of_x": "Traded %s / %s",
+    "backpacked.formatter.explored_x_of_x": "Explored %s / %s"
 }

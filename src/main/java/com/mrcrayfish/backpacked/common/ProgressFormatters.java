@@ -46,4 +46,24 @@ public class ProgressFormatters
         int percent = (int) (100 * (double) numerator / (double) denominator);
         return new TranslationTextComponent("backpacked.formatter.int_percent", percent, "%");
     };
+
+    public static final BiFunction<Integer, Integer, ITextComponent> CRAFT_X_OF_X = (count, maxCount) -> {
+        count = MathHelper.clamp(count, 0, maxCount);
+        return new TranslationTextComponent("backpacked.formatter.craft_x_of_x", count, maxCount);
+    };
+
+    public static final BiFunction<Integer, Integer, ITextComponent> INCOMPLETE_COMPLETE = (count, maxCount) -> {
+        if(count < maxCount) return new TranslationTextComponent("backpacked.formatter.incomplete");
+        return new TranslationTextComponent("backpacked.formatter.complete");
+    };
+
+    public static final BiFunction<Integer, Integer, ITextComponent> TRADED_X_OF_X = (count, maxCount) -> {
+        count = MathHelper.clamp(count, 0, maxCount);
+        return new TranslationTextComponent("backpacked.formatter.traded_x_of_x", count, maxCount);
+    };
+
+    public static final BiFunction<Integer, Integer, ITextComponent> EXPLORED_X_OF_X = (count, maxCount) -> {
+        count = MathHelper.clamp(count, 0, maxCount);
+        return new TranslationTextComponent("backpacked.formatter.explored_x_of_x", count, maxCount);
+    };
 }

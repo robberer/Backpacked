@@ -13,6 +13,15 @@ import java.util.List;
  */
 public class Config
 {
+    public static class Client
+    {
+        public final ForgeConfigSpec.BooleanValue hideConfigButton;
+
+        Client(ForgeConfigSpec.Builder builder)
+        {
+            this.hideConfigButton = builder.comment("If enabled, hides the config button from the backpack screen").define("hideConfigButton", false);
+        }
+    }
     public static class Common
     {
         public final ForgeConfigSpec.BooleanValue keepBackpackOnDeath;
@@ -37,6 +46,7 @@ public class Config
     {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> bannedItems;
         public final ForgeConfigSpec.BooleanValue unlockAllBackpacks;
+        public final ForgeConfigSpec.BooleanValue autoEquipBackpackOnPickup;
         public final ForgeConfigSpec.BooleanValue pickpocketBackpacks;
         public final ForgeConfigSpec.DoubleValue pickpocketMaxReachDistance;
         public final ForgeConfigSpec.DoubleValue pickpocketMaxRangeAngle;
@@ -60,12 +70,16 @@ public class Config
                         }
                     });
             this.unlockAllBackpacks = builder.comment("Allows every player to use any backpack cosmetic variant without needing to complete the challenges. Side note, any progress to a challenge will not be tracked while enabled.").define("unlockAllBackpacks", false);
+            this.autoEquipBackpackOnPickup = builder.comment("When picking up a backpack (with items inside) off the ground, the item will automatically equip. Having this enabled may not be ideal for multiplayer servers.").define("autoEquipBackpackOnPickup", false);
             this.pickpocketBackpacks = builder.comment("If enabled, allows players to access the backpack of another player by interacting with the visible backpack on their back.").define("pickpocketBackpacks", true);
             this.pickpocketMaxReachDistance = builder.comment("The maximum reach distance of a player to interact with another player's backpack.").defineInRange("pickpocketDistance", 1.5, 0.0, 4.0);
             this.pickpocketMaxRangeAngle = builder.comment("The maximum angle at which another player's backpack can be accessed").defineInRange("pickpocketMaxRangeAngle", 80.0, 0.0, 90.0);
             builder.pop();
         }
     }
+
+    static final ForgeConfigSpec clientSpec;
+    public static final Config.Client CLIENT;
 
     static final ForgeConfigSpec commonSpec;
     public static final Config.Common COMMON;
@@ -75,6 +89,10 @@ public class Config
 
     static
     {
+        final Pair<Client, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(Config.Client::new);
+        clientSpec = clientPair.getRight();
+        CLIENT = clientPair.getLeft();
+
         final Pair<Common, ForgeConfigSpec> commonPair = new ForgeConfigSpec.Builder().configure(Config.Common::new);
         commonSpec = commonPair.getRight();
         COMMON = commonPair.getLeft();

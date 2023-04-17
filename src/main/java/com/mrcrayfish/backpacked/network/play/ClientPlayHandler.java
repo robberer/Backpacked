@@ -5,14 +5,21 @@ import com.mrcrayfish.backpacked.client.gui.toasts.UnlockBackpackToast;
 import com.mrcrayfish.backpacked.common.Backpack;
 import com.mrcrayfish.backpacked.common.BackpackManager;
 import com.mrcrayfish.backpacked.common.UnlockTracker;
+import com.mrcrayfish.backpacked.common.backpack.WanderingBagBackpack;
+import com.mrcrayfish.backpacked.common.data.PickpocketChallenge;
+import com.mrcrayfish.backpacked.core.ModItems;
 import com.mrcrayfish.backpacked.inventory.ExtendedPlayerInventory;
 import com.mrcrayfish.backpacked.network.message.MessageOpenCustomisation;
 import com.mrcrayfish.backpacked.network.message.MessageSyncUnlockTracker;
+import com.mrcrayfish.backpacked.network.message.MessageSyncVillagerBackpack;
 import com.mrcrayfish.backpacked.network.message.MessageUnlockBackpack;
 import com.mrcrayfish.backpacked.network.message.MessageUpdateBackpack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.WanderingTraderRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.merchant.villager.WanderingTraderEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 
 /**
  * Author: MrCrayfish
@@ -73,5 +80,19 @@ public class ClientPlayHandler
             return;
 
         minecraft.setScreen(new CustomiseBackpackScreen(message.getProgressMap()));
+    }
+
+    public static void handleSyncVillagerBackpack(MessageSyncVillagerBackpack message)
+    {
+        Minecraft minecraft = Minecraft.getInstance();
+        if(minecraft.level == null)
+            return;
+
+        Entity entity = minecraft.level.getEntity(message.getEntityId());
+        if(entity instanceof WanderingTraderEntity)
+        {
+            WanderingTraderEntity trader = (WanderingTraderEntity) entity;
+            PickpocketChallenge.get(trader).ifPresent(data -> data.setBackpackEquipped(true));
+        }
     }
 }

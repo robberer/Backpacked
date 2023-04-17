@@ -37,13 +37,16 @@ public class BackpackManager
         this.register(new BambooBasketBackpack());
         this.register(new CardboardBoxBackpack());
         this.register(new ClassicBackpack());
+        this.register(new EndCrystalBackpack());
         this.register(new HoneyJarBackpack());
         this.register(new MiniChestBackpack());
+        this.register(new PiglinPackBackpack());
         this.register(new RocketBackpack());
         this.register(new SheepPlushBackpack());
         this.register(new StandardBackpack());
         this.register(new TrashCanBackpack());
         this.register(new TurtleShellBackpack());
+        this.register(new WanderingBagBackpack());
     }
 
     public synchronized void register(Backpack backpack)

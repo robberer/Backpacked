@@ -48,6 +48,19 @@ public class Curios
         return backpack.get();
     }
 
+    public static void setBackpackStack(PlayerEntity player, ItemStack stack)
+    {
+        LazyOptional<ICuriosItemHandler> optional = CuriosApi.getCuriosHelper().getCuriosHandler(player);
+        optional.ifPresent(itemHandler ->
+        {
+            Optional<ICurioStacksHandler> stacksOptional = itemHandler.getStacksHandler(SlotTypePreset.BACK.getIdentifier());
+            stacksOptional.ifPresent(stacksHandler ->
+            {
+                stacksHandler.getStacks().setStackInSlot(0, stack.copy());
+            });
+        });
+    }
+
     public static boolean isBackpackVisible(PlayerEntity player)
     {
         AtomicReference<Boolean> visible = new AtomicReference<>(true);
